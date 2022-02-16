@@ -40,6 +40,12 @@ defmodule DragWeb.UserLive.Index do
     {:noreply, assign(socket, :users, list_users())}
   end
 
+  def handle_event("did_sort", %{"items" => user_ids}, socket) do
+    {:ok, users} = Accounts.reorder_users(user_ids)
+
+    {:noreply, assign(socket, :users, users)}
+  end
+
   defp list_users do
     Accounts.list_users()
   end

@@ -14,16 +14,18 @@
     <tr>
       <th></th>
 
+      <th>ID</th>
       <th>Name</th>
       <th>Position</th>
 
       <th></th>
     </tr>
   </thead>
-  <tbody id="users">
+  <tbody id="users" phx-hook="Sortable" data-sortable-drag-handle=".user-drag-handle">
     <%= for user <- @users do %>
-      <tr id={"user-#{user.id}"}>
-        <td><span class="user-drag-handle">---</span></td>
+      <tr id={"user-#{user.id}"} data-sortable-list-id={user.id}>
+        <td><span class="cursor-pointer user-drag-handle">---</span></td>
+        <td><%= user.id %></td>
         <td><%= user.name %></td>
         <td><%= user.position %></td>
 

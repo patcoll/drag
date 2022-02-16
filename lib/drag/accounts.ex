@@ -49,6 +49,14 @@ defmodule Drag.Accounts do
 
   @doc false
   def reorder_users(user_ids = [_ | _]) do
+    user_ids =
+      user_ids
+      |> Enum.map(&Integer.parse/1)
+      |> Enum.map(fn
+        :error -> 0
+        {int, _} -> int
+      end)
+
     all_users_map =
       User
       |> where([u], u.id in ^user_ids)
